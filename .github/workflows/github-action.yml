@@ -1,0 +1,29 @@
+name: CI/CD to Linux Server
+
+on:
+  push:
+    branches:
+      - action
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+      
+    - name: Print Working Directory
+      run: pwd
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Serve (Opsional, tergantung pada kebutuhan Anda)
+      run: npm run serve
