@@ -9,15 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
-        with:
-          node-version: '18'
-        run: export NODE_OPTIONS=--openssl-legacy-provider
+      - name: Set up Node.js version and run custom command
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
 
       - name: npm install, build, and test
         run: |
