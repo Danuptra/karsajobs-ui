@@ -1,0 +1,14 @@
+name: Node.js Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  test-helm:
+    runs-on: self-hosted
+    steps:
+      - name: Ensure Helm is available
+        run: |
+          echo "Helm is installed in: $(which helm)"
+          helm --version
