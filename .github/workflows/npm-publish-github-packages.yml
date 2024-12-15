@@ -13,3 +13,4 @@ jobs:
         run: |
           echo "Helm is installed in: $(which helm)"
           helm version
+          helm list -n ingress-nginx
