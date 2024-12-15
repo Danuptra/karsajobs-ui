@@ -12,4 +12,4 @@ jobs:
       - name: Ensure Helm is available
         run: |
           echo "Helm is installed in: $(which helm)"
-          helm --version
+          helm version
