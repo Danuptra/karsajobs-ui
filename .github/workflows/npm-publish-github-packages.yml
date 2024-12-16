@@ -12,12 +12,5 @@ jobs:
       - name: Set up Kubernetes credentials
         run: |
           echo "$KUBECONFIG_CONTENT" > ~/.kube/config
-
-      - name: Ensure Helm is available
-        run: |
-          echo "Helm is installed in: $(which helm)"
           helm version
-
-      - name: List Helm releases in ingress-nginx namespace
-        run: |
           helm list -n ingress-nginx
