@@ -3,12 +3,12 @@ name: Helm List on Commit to Master
 on:
   push:
     branches:
-      - master 
+      - master
   workflow_dispatch:
 
 jobs:
   helm-list:
-    runs-on: 'self-hosted'
+    runs-on: self-hosted
     
     steps:
     - uses: actions/checkout@v2
@@ -17,6 +17,10 @@ jobs:
       run: |
         mkdir -p ~/.kube
         echo "$KUBECONFIG_CONTENT" > ~/.kube/config
+
+    - name: Verify Kubernetes connectivity
+      run: |
+        kubectl get nodes --kubeconfig ~/.kube/config
 
     - name: List Helm Releases in ingress-nginx namespace
       run: |
