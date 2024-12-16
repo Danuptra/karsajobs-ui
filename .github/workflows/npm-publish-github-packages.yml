@@ -16,7 +16,7 @@ jobs:
           helm version
           
           # Verify Kubernetes access
-          kubectl get nodes
+          kubectl get nodes --kubeconfig ~/.kube/config 
           
           # List Helm releases in the ingress-nginx namespace
-          helm list -n ingress-nginx || echo "No releases found or unable to connect to the Kubernetes cluster."
+          helm list -n ingress-nginx --kubeconfig ~/.kube/config || echo "No releases found or unable to connect to the Kubernetes cluster."
