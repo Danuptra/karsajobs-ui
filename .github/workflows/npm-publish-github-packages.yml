@@ -17,9 +17,6 @@ jobs:
       run: |
         mkdir -p ~/.kube
         echo "$KUBECONFIG_CONTENT" > ~/.kube/config
-
-    - name: Verify Kubernetes connectivity
-      run: |
         kubectl get nodes --kubeconfig ~/.kube/config
 
     - name: List Helm Releases in ingress-nginx namespace
