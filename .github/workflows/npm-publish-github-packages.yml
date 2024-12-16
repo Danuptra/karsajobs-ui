@@ -12,5 +12,11 @@ jobs:
       - name: Set up Kubernetes credentials
         run: |
           echo "$KUBECONFIG_CONTENT" > ~/.kube/config
+          # Verify Helm installation
           helm version
-          helm list -n ingress-nginx
+          
+          # Verify Kubernetes access
+          kubectl get nodes
+          
+          # List Helm releases in the ingress-nginx namespace
+          helm list -n ingress-nginx || echo "No releases found or unable to connect to the Kubernetes cluster."
