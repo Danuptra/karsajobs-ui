@@ -3,17 +3,18 @@ name: Helm List on Commit to Master
 on:
   push:
     branches:
-      - master
+      - master 
 
 jobs:
   helm-list:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'self-hosted'
     
     steps:
     - uses: actions/checkout@v2
 
     - name: Set up Kubernetes credentials
       run: |
+        mkdir -p ~/.kube
         echo "$KUBECONFIG_CONTENT" > ~/.kube/config
 
     - name: List Helm Releases in ingress-nginx namespace
