@@ -1,22 +1,24 @@
-name: Node.js Package
+name: Helm List on Commit to Master
 
 on:
-  release:
-    types: [created]
-  workflow_dispatch:
+  push:
+    branches:
+      - master
 
 jobs:
-  test-helm:
-    runs-on: self-hosted
+  helm-list:
+    runs-on: 'ubuntu-latest'
+    
     steps:
-      - name: Set up Kubernetes credentials
-        run: |
-          echo "$KUBECONFIG_CONTENT" > ~/.kube/config
-          # Verify Helm installation
-          helm version
-          
-          # Verify Kubernetes access
-          kubectl get nodes --kubeconfig ~/.kube/config 
-          
-          # List Helm releases in the ingress-nginx namespace
-          helm list -n ingress-nginx --kubeconfig ~/.kube/config || echo "No releases found or unable to connect to the Kubernetes cluster."
+    - uses: actions/checkout@v2
+
+    - name: Set up Kubernetes credentials
+      run: |
+        echo "$KUBECONFIG_CONTENT" > ~/.kube/config
+
+    - name: List Helm Releases in ingress-nginx namespace
+      run: |
+        helm version
+        helm list -n ingress-nginx
+      env:
+        KUBECONFIG_CONTENT: '${{ secrets.KUBECONFIG_CONTENT }}'
